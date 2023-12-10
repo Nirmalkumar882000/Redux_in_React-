@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import MyVerticallyCenteredModal from "./UpdateTask";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {removeFromList, setSelectedTask} from "../slices/taskSlice"
 
 function Tables() {
   const [modalShow, setModalShow] = useState(false);
 
   const { taskList } = useSelector((state) => state.tasks);
 
-  const deleteTask = (e) => {};
+  const dispatch = useDispatch()
 
-  const updateTask = (e) => {
+  const deleteTask = (task) => {
+    dispatch(removeFromList(task))
+    console.log("Task Deleted")
+  };
+
+  const updateTask = (task) => {
     setModalShow(true);
+    dispatch(setSelectedTask(task))
+
   };
 
   return (
@@ -20,7 +28,7 @@ function Tables() {
         <tr>
           <th>#</th>
           <th>First Name</th>
-          <th>Last Name</th>
+          <th>Description</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -36,11 +44,11 @@ function Tables() {
                   <Button
                     className="mx-3"
                     variant="primary"
-                    onClick={(e) => updateTask(e)}
+                    onClick={() => updateTask(task)}
                   >
                     <i className="bi bi-pencil-square"></i>
                   </Button>
-                  <Button variant="primary" onClick={(e) => deleteTask(e)}>
+                  <Button variant="primary" onClick={() => deleteTask(task)}>
                     <i className="bi bi-trash"></i>
                   </Button>
                 </td>

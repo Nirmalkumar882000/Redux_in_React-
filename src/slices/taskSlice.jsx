@@ -20,8 +20,8 @@ const taskSlice=createSlice({
         removeFromList:(state,action)=>{
             state.taskList=state.taskList.filter((task)=>task.id !== action.payload.id)
         },
-        updateFrmoList:(state,action)=>{
-            state.taskList =state.taskList.map((task)=>task.id === action.payload.id ? action.payload : task)
+        updateTaskInList:(state,action) => {
+            state.taskList = state.taskList.map((task) => task.id === action.payload.id ? action.payload : task )
         },
         setSelectedTask:(state,action)=>{
             state.selectTask=action.payload
@@ -30,7 +30,7 @@ const taskSlice=createSlice({
 })
 
 
-export const {addTaskList,removeFromList,updateFrmoList,setSelectedTask} = taskSlice.actions
+export const {addTaskList,removeFromList,updateTaskInList,setSelectedTask} = taskSlice.actions
 
 export default taskSlice.reducer
 
